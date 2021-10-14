@@ -18,13 +18,13 @@ void loop() {
     // These names do not 100% map to the new controller
     // but everything should still work I think
     // See "https://www.radiolink.com/t8s_manual" for more info
-    int val_THRO = RCControl.get_THRO();
-    int val_AILE = RCControl.get_AILE();
-    int val_ELEV = RCControl.get_ELEV();
-    int val_RUDD = RCControl.get_RUDD();
-    int val_GEAR = RCControl.get_GEAR();
-    int val_AUX1 = RCControl.get_AUX1();
-    int val_AUX2 = RCControl.get_AUX2();
+    const int val_THRO = RCControl.get_THRO();
+    const int val_AILE = RCControl.get_AILE();
+    const int val_ELEV = RCControl.get_ELEV();
+    const int val_RUDD = RCControl.get_RUDD();
+    const int val_GEAR = RCControl.get_GEAR();
+    const int val_AUX1 = RCControl.get_AUX1();
+    const int val_AUX2 = RCControl.get_AUX2();
 
     // prints values
     RCControl.print_manual();

@@ -1,10 +1,10 @@
 #include "WheelControl.h"
 
-WheelControl::WheelControl(int _Motor_PWM) {
+WheelControl::WheelControl(const int _Motor_PWM) {
     this->Motor_PWM = _Motor_PWM;
 }
 
-void WheelControl::set_Motor_PWM(int _Motor_PWM) {
+void WheelControl::set_Motor_PWM(const int _Motor_PWM) {
     this->Motor_PWM = _Motor_PWM;
 }
 

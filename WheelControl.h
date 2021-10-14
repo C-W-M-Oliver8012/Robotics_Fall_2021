@@ -39,8 +39,8 @@
 
 class WheelControl {
     public:
-        WheelControl(int _Motor_PWM);
-        void set_Motor_PWM(int _Motor_PWM);
+        WheelControl(const int _Motor_PWM);
+        void set_Motor_PWM(const int _Motor_PWM);
 
         void io_init(void);
 
