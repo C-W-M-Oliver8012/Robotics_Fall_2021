@@ -113,16 +113,16 @@ int RCControl::get_AUX2(void) {
 
 void RCControl::print_manual(void) {
 	Serial.print(val_THRO);
-    Serial.print(" ,");
-    Serial.print(val_AILE);
-    Serial.print(" ,");
-    Serial.print(val_ELEV);
-    Serial.print(" ,");
-    Serial.print(val_RUDD);
-    Serial.print(" ,");
-    Serial.print(val_GEAR);
-    Serial.print(" ,");
-    Serial.print(val_AUX1);
-    Serial.print(" ,");
-    Serial.println(val_AUX2);
+	Serial.print(" ,");
+	Serial.print(val_AILE);
+	Serial.print(" ,");
+	Serial.print(val_ELEV);
+	Serial.print(" ,");
+	Serial.print(val_RUDD);
+	Serial.print(" ,");
+	Serial.print(val_GEAR);
+	Serial.print(" ,");
+	Serial.print(val_AUX1);
+	Serial.print(" ,");
+	Serial.println(val_AUX2);
 }
