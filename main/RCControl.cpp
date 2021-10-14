@@ -27,7 +27,7 @@ RCControl::RCControl(
 }
 
 int RCControl::get_THRO(void) {
-	int const val_THRO_RAW = pulseIn(this->pinTHRO, HIGH, PERIOD);
+	int val_THRO_RAW = pulseIn(this->pinTHRO, HIGH, PERIOD);
 	if (val_THRO_RAW <= RC_PWM_MIN || val_THRO_RAW >= RC_PWM_MAX) {
 		if (val_THRO_RAW <= RC_PWM_MIN)
 			val_THRO_RAW = RC_PWM_MIN;
@@ -39,7 +39,7 @@ int RCControl::get_THRO(void) {
 }
 
 int RCControl::get_AILE(void) {
-	int const val_AILE_RAW = pulseIn(this->pinAILE, HIGH, PERIOD);
+	int val_AILE_RAW = pulseIn(this->pinAILE, HIGH, PERIOD);
 	if (val_AILE_RAW <= RC_PWM_MIN || val_AILE_RAW >= RC_PWM_MAX) {
 		if (val_AILE_RAW <= RC_PWM_MIN)
 			val_AILE_RAW = RC_PWM_MIN;
@@ -51,7 +51,7 @@ int RCControl::get_AILE(void) {
 }
 
 int RCControl::get_ELEV(void) {
-	int const val_ELEV_RAW = pulseIn(this->pinELEV, HIGH, PERIOD);
+	int val_ELEV_RAW = pulseIn(this->pinELEV, HIGH, PERIOD);
 	if (val_ELEV_RAW <= RC_PWM_MIN || val_ELEV_RAW >= RC_PWM_MAX) {
 		if (val_ELEV_RAW <= RC_PWM_MIN)
 			val_ELEV_RAW = RC_PWM_MIN;
@@ -63,7 +63,7 @@ int RCControl::get_ELEV(void) {
 }
 
 int RCControl::get_RUDD(void) {
-	int const val_RUDD_RAW = pulseIn(this->pinRUDD, HIGH, PERIOD);
+	int val_RUDD_RAW = pulseIn(this->pinRUDD, HIGH, PERIOD);
 	if (val_RUDD_RAW <= RC_PWM_MIN || val_RUDD_RAW >= RC_PWM_MAX) {
 		if (val_RUDD_RAW <= RC_PWM_MIN)
 			val_RUDD_RAW = RC_PWM_MIN;
@@ -75,7 +75,7 @@ int RCControl::get_RUDD(void) {
 }
 
 int RCControl::get_GEAR(void) {
-	int const val_GEAR_RAW = pulseIn(this->pinGEAR, HIGH);
+	const int val_GEAR_RAW = pulseIn(this->pinGEAR, HIGH);
 	if (val_GEAR_RAW < 1300) {
 		this->val_GEAR = -100;
 	} else if (val_GEAR_RAW > 1700) {
@@ -85,7 +85,7 @@ int RCControl::get_GEAR(void) {
 }
 
 int RCControl::get_AUX1(void) {
-	int const val_AUX1_RAW = pulseIn(this->pinAUX1, HIGH);
+	const int val_AUX1_RAW = pulseIn(this->pinAUX1, HIGH);
 	if (val_AUX1_RAW < 1300) {
 		this->val_AUX1 = -100;
 	}
@@ -99,7 +99,7 @@ int RCControl::get_AUX1(void) {
 }
 
 int RCControl::get_AUX2(void) {
-	int const val_AUX2_RAW = pulseIn(this->pinAUX2, HIGH, PERIOD);
+	int val_AUX2_RAW = pulseIn(this->pinAUX2, HIGH, PERIOD);
 	if (val_AUX2_RAW <= RC_PWM_MIN || val_AUX2_RAW >= RC_PWM_MAX) {
 		if (val_AUX2_RAW <= RC_PWM_MIN)
 			val_AUX2_RAW = RC_PWM_MIN;
