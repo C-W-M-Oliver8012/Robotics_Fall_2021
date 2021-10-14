@@ -30,8 +30,10 @@ void WheelControl::io_init(void) {
 //     |  |  |
 //    ↑C-----D↑
 void WheelControl::forward(void) {
-  MOTORA_FORWARD(Motor_PWM);MOTORB_FORWARD(Motor_PWM);
-  MOTORC_FORWARD(Motor_PWM);MOTORD_FORWARD(Motor_PWM);
+    MOTORA_FORWARD(this->Motor_PWM);
+    MOTORB_FORWARD(this->Motor_PWM);
+    MOTORC_FORWARD(this->Motor_PWM);
+    MOTORD_FORWARD(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -40,8 +42,10 @@ void WheelControl::forward(void) {
 //     |  ↓  |
 //    ↓C-----D↓
 void WheelControl::reverse(void) {
-  MOTORA_BACKOFF(Motor_PWM);MOTORB_BACKOFF(Motor_PWM);
-  MOTORC_BACKOFF(Motor_PWM);MOTORD_BACKOFF(Motor_PWM);
+    MOTORA_BACKOFF(this->Motor_PWM);
+    MOTORB_BACKOFF(this->Motor_PWM);
+    MOTORC_BACKOFF(this->Motor_PWM);
+    MOTORD_BACKOFF(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -50,8 +54,10 @@ void WheelControl::reverse(void) {
 //     | ↖   |
 //    ↑C-----D=
 void WheelControl::left1(void) {
-  MOTORA_STOP(Motor_PWM);MOTORB_FORWARD(Motor_PWM);
-  MOTORC_FORWARD(Motor_PWM);MOTORD_STOP(Motor_PWM);
+    MOTORA_STOP(this->Motor_PWM);
+    MOTORB_FORWARD(this->Motor_PWM);
+    MOTORC_FORWARD(this->Motor_PWM);
+    MOTORD_STOP(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -60,8 +66,10 @@ void WheelControl::left1(void) {
 //     |  ←  |
 //    ↑C-----D↓
 void WheelControl::left2(void) {
-  MOTORA_BACKOFF(Motor_PWM);MOTORB_FORWARD(Motor_PWM);
-  MOTORC_FORWARD(Motor_PWM);MOTORD_BACKOFF(Motor_PWM);
+    MOTORA_BACKOFF(this->Motor_PWM);
+    MOTORB_FORWARD(this->Motor_PWM);
+    MOTORC_FORWARD(this->Motor_PWM);
+    MOTORD_BACKOFF(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -70,8 +78,10 @@ void WheelControl::left2(void) {
 //     |   ↙ |
 //    =C-----D↓
 void WheelControl::left3(void) {
-  MOTORA_BACKOFF(Motor_PWM);MOTORB_STOP(Motor_PWM);
-  MOTORC_STOP(Motor_PWM);MOTORD_BACKOFF(Motor_PWM);
+    MOTORA_BACKOFF(this->Motor_PWM);
+    MOTORB_STOP(this->Motor_PWM);
+    MOTORC_STOP(this->Motor_PWM);
+    MOTORD_BACKOFF(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -80,8 +90,10 @@ void WheelControl::left3(void) {
 //     |   ↗ |
 //    =C-----D↑
 void WheelControl::right1(void) {
-  MOTORA_FORWARD(Motor_PWM);MOTORB_STOP(Motor_PWM);
-  MOTORC_STOP(Motor_PWM);MOTORD_FORWARD(Motor_PWM);
+    MOTORA_FORWARD(this->Motor_PWM);
+    MOTORB_STOP(this->Motor_PWM);
+    MOTORC_STOP(this->Motor_PWM);
+    MOTORD_FORWARD(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -90,8 +102,10 @@ void WheelControl::right1(void) {
 //     |  →  |
 //    ↓C-----D↑
 void WheelControl::right2(void) {
-  MOTORA_FORWARD(Motor_PWM);MOTORB_BACKOFF(Motor_PWM);
-  MOTORC_BACKOFF(Motor_PWM);MOTORD_FORWARD(Motor_PWM);
+    MOTORA_FORWARD(this->Motor_PWM);
+    MOTORB_BACKOFF(this->Motor_PWM);
+    MOTORC_BACKOFF(this->Motor_PWM);
+    MOTORD_FORWARD(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -100,8 +114,10 @@ void WheelControl::right2(void) {
 //     | ↘   |
 //    ↓C-----D=
 void WheelControl::right3(void) {
-  MOTORA_STOP(Motor_PWM);MOTORB_BACKOFF(Motor_PWM);
-  MOTORC_BACKOFF(Motor_PWM);MOTORD_STOP(Motor_PWM);
+    MOTORA_STOP(this->Motor_PWM);
+    MOTORB_BACKOFF(this->Motor_PWM);
+    MOTORC_BACKOFF(this->Motor_PWM);
+    MOTORD_STOP(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -110,8 +126,10 @@ void WheelControl::right3(void) {
 //  |     |
 // ↓C-----D↑
 void WheelControl::turn_left(void) {
-  MOTORA_BACKOFF(Motor_PWM);MOTORB_FORWARD(Motor_PWM);
-  MOTORC_BACKOFF(Motor_PWM);MOTORD_FORWARD(Motor_PWM);
+    MOTORA_BACKOFF(this->Motor_PWM);
+    MOTORB_FORWARD(this->Motor_PWM);
+    MOTORC_BACKOFF(this->Motor_PWM);
+    MOTORD_FORWARD(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -120,8 +138,10 @@ void WheelControl::turn_left(void) {
 //  |     |
 // ↑C-----D↓
 void WheelControl::turn_right(void) {
-  MOTORA_FORWARD(Motor_PWM);MOTORB_BACKOFF(Motor_PWM);
-  MOTORC_FORWARD(Motor_PWM);MOTORD_BACKOFF(Motor_PWM);
+    MOTORA_FORWARD(this->Motor_PWM);
+    MOTORB_BACKOFF(this->Motor_PWM);
+    MOTORC_FORWARD(this->Motor_PWM);
+    MOTORD_BACKOFF(this->Motor_PWM);
 }
 
 //------------------------------------------------------------------------------
@@ -130,6 +150,8 @@ void WheelControl::turn_right(void) {
 //     |  =  |
 //    =C-----D=
 void WheelControl::stop(void) {
-  MOTORA_STOP(Motor_PWM);MOTORB_STOP(Motor_PWM);
-  MOTORC_STOP(Motor_PWM);MOTORD_STOP(Motor_PWM);
+    MOTORA_STOP(this->Motor_PWM);
+    MOTORB_STOP(this->Motor_PWM);
+    MOTORC_STOP(this->Motor_PWM);
+    MOTORD_STOP(this->Motor_PWM);
 }
