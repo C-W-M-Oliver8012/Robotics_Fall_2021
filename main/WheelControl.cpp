@@ -10,17 +10,13 @@ void WheelControl::set_Motor_PWM(const int _Motor_PWM) {
 
 void WheelControl::io_init(void) {
     pinMode(PWMA, OUTPUT);
-    pinMode(DIRA1, OUTPUT);
-    pinMode(DIRA2, OUTPUT);
+    pinMode(DIRA, OUTPUT);
     pinMode(PWMB, OUTPUT);
-    pinMode(DIRB1, OUTPUT);
-    pinMode(DIRB2, OUTPUT);
+    pinMode(DIRB, OUTPUT);
     pinMode(PWMC, OUTPUT);
-    pinMode(DIRC1, OUTPUT);
-    pinMode(DIRC2, OUTPUT);
+    pinMode(DIRC, OUTPUT);
     pinMode(PWMD, OUTPUT);
-    pinMode(DIRD1, OUTPUT);
-    pinMode(DIRD2, OUTPUT);
+    pinMode(DIRD, OUTPUT);
     this->stop();
 }
 

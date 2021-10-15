@@ -6,7 +6,7 @@ RCControl RCControl(39, 40, 41, 42, 43, 44, 45);
 
 // does setting WheelControl.pwm to WHEEL_MIN_PWM stop the motor or should
 // it be set to zero
-WheelControl WheelControl(WHEEL_MIN_PWM);
+WheelControl WheelControl(50);
 
 void setup() {
     // 9600 probably needs changed. This should be defined somewhere
@@ -31,7 +31,7 @@ void loop() {
 
     if (val_THRO >= POS_THRES) {
         WheelControl.set_Motor_PWM(
-           map(val_THRO, POS_THRES, 100, WHEEL_MIN_PWM, WHEEL_MAX_PWM)
+           map(val_THRO, POS_THRES, 100, 0, 255)
         );
     } else {
         WheelControl.stop();
