@@ -3,9 +3,6 @@
 
 // These numbers will likely need to be changed
 RCControl RCControl(39, 40, 41, 42, 43, 44, 45);
-
-// does setting WheelControl.pwm to WHEEL_MIN_PWM stop the motor or should
-// it be set to zero
 WheelControl WheelControl(50);
 
 void setup() {
@@ -29,6 +26,7 @@ void loop() {
     // prints values
     RCControl.print_manual();
 
+    // sets speed
     if (val_THRO >= POS_THRES) {
         WheelControl.set_Motor_PWM(
            map(val_THRO, POS_THRES, 100, 0, 255)
@@ -36,9 +34,6 @@ void loop() {
     } else {
         WheelControl.stop();
     }
-
-    // POS_THRES and NEG_THRES are defined in RCControl.h
-    // I believe that this is how the controller maps but I could be wrong
 
     // up and left
     if (val_ELEV >= POS_THRES && val_AILE >= POS_THRES) {
