@@ -3,9 +3,9 @@
 
 #include <Arduino.h>
 
-#define PERIOD		3000
-#define RC_PWM_MIN		1148
-#define RC_PWM_MAX		1900
+#define PERIOD 30000
+#define RC_PWM_MIN 990
+#define RC_PWM_MAX 1980
 
 #define POS_THRES 20
 #define NEG_THRES -20

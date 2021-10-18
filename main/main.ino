@@ -1,13 +1,14 @@
 #include "RCControl.h"
 #include "WheelControl.h"
 
+#define SERIAL_NUMBER 115200
+
 // These numbers will likely need to be changed
-RCControl RCControl(39, 40, 41, 42, 43, 44, 45);
-WheelControl WheelControl(50);
+RCControl RCControl(41, 39, 40, 42, 43, 44, 45);
+WheelControl WheelControl(0);
 
 void setup() {
-    // 9600 probably needs changed. This should be defined somewhere
-    Serial.begin(9600);
+    Serial.begin(SERIAL_NUMBER);
     WheelControl.io_init();
 }
 
@@ -29,26 +30,15 @@ void loop() {
     // sets speed
     if (val_THRO >= POS_THRES) {
         WheelControl.set_Motor_PWM(
-           map(val_THRO, POS_THRES, 100, 0, 255)
+           map(val_THRO, POS_THRES, 100, 1, 255)
         );
     } else {
+        WheelControl.set_Motor_PWM(0);
         WheelControl.stop();
     }
 
-    // up and left
-    if (val_ELEV >= POS_THRES && val_AILE >= POS_THRES) {
-        WheelControl.left1();
-    // down and left
-    } else if (val_ELEV <= NEG_THRES && val_AILE >= POS_THRES) {
-        WheelControl.left3();
-    // up and right
-    } else if (val_ELEV >= POS_THRES && val_AILE <= NEG_THRES) {
-        WheelControl.right1();
-    // down and right
-    } else if (val_ELEV <= NEG_THRES && val_AILE <= NEG_THRES) {
-        WheelControl.right3();
     // up
-    } else if (val_ELEV >= POS_THRES) {
+    if (val_ELEV >= POS_THRES) {
         WheelControl.forward();
     // down
     } else if (val_ELEV <= NEG_THRES) {
@@ -56,12 +46,10 @@ void loop() {
     // left
     } else if (val_AILE >= POS_THRES) {
         // Not sure which we want
-        //WheelControl.left2();
         WheelControl.turn_left();
     // right
     } else if (val_AILE <= NEG_THRES) {
         // Not sure which we want
-        //WheelControl.right2();
         WheelControl.turn_right();
     // stop
     } else {
