@@ -1,58 +1,51 @@
-#include "RCControl.h"
-#include "WheelControl.h"
+#include "rc.h"
+#include "wc.h"
 
-#define SERIAL_NUMBER 115200
+#define SERIAL_NUM 115200
 
-// These numbers will likely need to be changed
-RCControl RCControl(41, 39, 40, 42, 43, 44, 45);
-WheelControl WheelControl(0);
+#define PIN_AILE 39
+#define PIN_ELEV 40
+#define PIN_THRO 41
 
-void setup() {
-    Serial.begin(SERIAL_NUMBER);
-    WheelControl.io_init();
+Rc rc;
+Wc wc;
+
+void setup(void) {
+	rc_init(&rc, PIN_AILE, PIN_ELEV, PIN_THRO);
+	wc_init(&wc, 0);
+
+	Serial.begin(SERIAL_NUM);
+	rc_io_init(&rc);
+	wc_io_init(&wc);
 }
 
-void loop() {
-    // These names do not 100% map to the new controller
-    // but everything should still work I think
-    // See "https://www.radiolink.com/t8s_manual" for more info
-    const int val_THRO = RCControl.get_THRO();
-    const int val_AILE = RCControl.get_AILE();
-    const int val_ELEV = RCControl.get_ELEV();
-    const int val_RUDD = RCControl.get_RUDD();
-    const int val_GEAR = RCControl.get_GEAR();
-    const int val_AUX1 = RCControl.get_AUX1();
-    const int val_AUX2 = RCControl.get_AUX2();
+void loop(void) {
+	// get rc values
+	rc_get_AILE(&rc);
+	rc_get_ELEV(&rc);
+	rc_get_THRO(&rc);
 
-    // prints values
-    RCControl.print_manual();
+	// print rc values
+	rc_print(&rc);
 
-    // sets speed
-    if (val_THRO >= POS_THRES) {
-        WheelControl.set_Motor_PWM(
-           map(val_THRO, POS_THRES, 100, 1, 255)
-        );
-    } else {
-        WheelControl.set_Motor_PWM(0);
-        WheelControl.stop();
-    }
+	// set wc speed
+	if (rc.val_THRO >= POS_THRES) {
+		wc.motor_pwd = map(rc.val_THRO, POS_THRES, 100, 1, 255);
+	} else {
+		wc.motor_pwd = 0;
+		wc_stop(&wc);
+	}
 
-    // up
-    if (val_ELEV >= POS_THRES) {
-        WheelControl.forward();
-    // down
-    } else if (val_ELEV <= NEG_THRES) {
-        WheelControl.reverse();
-    // left
-    } else if (val_AILE >= POS_THRES) {
-        // Not sure which we want
-        WheelControl.turn_left();
-    // right
-    } else if (val_AILE <= NEG_THRES) {
-        // Not sure which we want
-        WheelControl.turn_right();
-    // stop
-    } else {
-        WheelControl.stop();
-    }
+	// set wc direction
+	if (rc.val_ELEV >= POS_THRES) {
+		wc_forward(&wc);
+	} else if (rc.val_ELEV <= NEG_THRES) {
+		wc_reverse(&wc);
+	} else if (rc.val_AILE <= NEG_THRES) {
+		wc_turn_left(&wc);
+	} else if (rc.val_AILE >= POS_THRES) {
+		wc_turn_right(&wc);
+	} else {
+		wc_stop(&wc);
+	}
 }

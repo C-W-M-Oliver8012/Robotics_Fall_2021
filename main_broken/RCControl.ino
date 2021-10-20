@@ -16,7 +16,9 @@ RCControl::RCControl(
 	this->pinGEAR = _pinGEAR;
 	this->pinAUX1 = _pinAUX1;
 	this->pinAUX2 = _pinAUX2;
+}
 
+void RCControl::io_init(void) {
 	pinMode(this->pinTHRO, INPUT);
 	pinMode(this->pinAILE, INPUT);
 	pinMode(this->pinELEV, INPUT);

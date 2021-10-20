@@ -22,6 +22,8 @@ class RCControl {
 			unsigned char _pinAUX2
 		);
 
+		void io_init(void);
+
 		int get_THRO(void);
 		int get_AILE(void);
 		int get_ELEV(void);
