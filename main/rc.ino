@@ -41,7 +41,7 @@ void rc_get_ELEV(Rc *rc) {
 	rc->val_ELEV = map(val_ELEV_RAW, RC_PWM_MIN, RC_PWM_MAX, 100, -100);
 }
 
-int rc_get_THRO(Rc *rc) {
+void rc_get_THRO(Rc *rc) {
 	int val_THRO_RAW = pulseIn(rc->pinTHRO, HIGH, PERIOD);
 	if (val_THRO_RAW <= RC_PWM_MIN || val_THRO_RAW >= RC_PWM_MAX) {
 		if (val_THRO_RAW <= RC_PWM_MIN)

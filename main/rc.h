@@ -1,5 +1,5 @@
-#ifndef RCCONTROL
-#define RCCONTROL
+#ifndef RC
+#define RC
 
 #define PERIOD 30000
 #define RC_PWM_MIN 990
@@ -24,9 +24,9 @@ void rc_init(
 );
 
 void rc_io_init(Rc *rc);
-void get_AILE(Rc *rc);
-void get_ELEV(Rc *rc);
-void get_THRO(Rc *rc);
+void rc_get_AILE(Rc *rc);
+void rc_get_ELEV(Rc *rc);
+void rc_get_THRO(Rc *rc);
 void rc_print(Rc *rc);
 
 #endif

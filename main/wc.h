@@ -1,5 +1,5 @@
-#ifndef WHEELCONTROL
-#define WHEELCONTROL
+#ifndef WC
+#define WC
 
 #define PWMA 3
 #define DIRA 2
