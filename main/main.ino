@@ -34,45 +34,58 @@ void loop(void) {
 	// print rc values
 	rc_print(&rc);
 
-	// set wc speed
-	if (rc.val_THRO >= POS_THRES) {
-		wc.motor_pwd = map(rc.val_THRO, POS_THRES, 100, 1, 255);
-	} else {
-		wc.motor_pwd = 0;
-		wc_stop(&wc);
+	// set is_automatic
+	// set to 100 but maybe a different value
+	if (rc.val_AUX6 == 100 && wc.is_automatic == false) {
+		wc.is_automatic = true;
+		wc.motor_pwd = AUTOMATIC_SPEED;
+	} else if (rc.val_AUX6 == 100 && wc.is_automatic == true) {
+		wc.is_automatic = false;
 	}
 
-	// set wc direction
-	if (rc.val_ELEV >= POS_THRES) {
-		wc_forward(&wc);
-	} else if (rc.val_ELEV <= NEG_THRES) {
-		wc_reverse(&wc);
-	} else if (rc.val_AILE <= NEG_THRES) {
-		wc_turn_left(&wc);
-	} else if (rc.val_AILE >= POS_THRES) {
-		wc_turn_right(&wc);
-	} else {
-		wc_stop(&wc);
-	}
+	if (wc.is_automatic == false) {
+		// set wc speed
+		if (rc.val_THRO >= POS_THRES) {
+			wc.motor_pwd = map(rc.val_THRO, POS_THRES, 100, 1, 255);
+		} else {
+			wc.motor_pwd = 0;
+			wc_stop(&wc);
+		}
 
-	// move stepper
-	if (rc.val_AUX5 == 100 && rc.val_AUX7 == 100) {
-		Serial1.write(1);
-	} else if (rc.val_AUX5 == 100 && rc.val_AUX7 == 0) {
-		Serial1.write(2);
-	} else if (rc.val_AUX5 == 100 && rc.val_AUX7 == -100) {
-		Serial1.write(3);
-	} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == 100) {
-		Serial1.write(4);
-	} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == 0) {
-		Serial1.write(5);
-	} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == -100) {
-		Serial1.write(6);
-	} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == 100) {
-		Serial1.write(7);
-	} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == 0) {
-		Serial1.write(8);
-	} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == -100) {
-		Serial1.write(9);
+		// set wc direction
+		if (rc.val_ELEV >= POS_THRES) {
+			wc_forward(&wc);
+		} else if (rc.val_ELEV <= NEG_THRES) {
+			wc_reverse(&wc);
+		} else if (rc.val_AILE <= NEG_THRES) {
+			wc_turn_left(&wc);
+		} else if (rc.val_AILE >= POS_THRES) {
+			wc_turn_right(&wc);
+		} else {
+			wc_stop(&wc);
+		}
+
+		// move stepper
+		if (rc.val_AUX5 == 100 && rc.val_AUX7 == 100) {
+			Serial1.write(1);
+		} else if (rc.val_AUX5 == 100 && rc.val_AUX7 == 0) {
+			Serial1.write(2);
+		} else if (rc.val_AUX5 == 100 && rc.val_AUX7 == -100) {
+			Serial1.write(3);
+		} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == 100) {
+			Serial1.write(4);
+		} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == 0) {
+			Serial1.write(5);
+		} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == -100) {
+			Serial1.write(6);
+		} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == 100) {
+			Serial1.write(7);
+		} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == 0) {
+			Serial1.write(8);
+		} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == -100) {
+			Serial1.write(9);
+		}
+	} else {
+		wc_auto_avoidance(&wc);
 	}
 }

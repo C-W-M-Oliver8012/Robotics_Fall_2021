@@ -1,6 +1,8 @@
 #ifndef WC
 #define WC
 
+#include <Servo.h>
+
 #define PWMA 3
 #define DIRA 2
 #define PWMB 5
@@ -29,7 +31,21 @@
 #define WHEEL_MAX_PWM 150
 #define WHEEL_MIN_PWM 50
 
+// these will probably change
+#define SERVO_PIN 13
+#define TRIG_PIN 30
+#define ECHO_PIN 31
+
+// these will probably change
+#define AUTOMATIC_SPEED 150
+#define TURN_TIME 250
+#define FORWARD_TIME 200
+#define BACK_TIME 300
+#define OBSTACLE_LIMIT 30
+
 typedef struct Wc {
+	Servo head;
+	bool is_automatic;
 	int motor_pwd;
 } Wc;
 
@@ -40,5 +56,8 @@ void wc_reverse(Wc *wc);
 void wc_turn_left(Wc *wc);
 void wc_turn_right(Wc *wc);
 void wc_stop(Wc *wc);
+int wc_watch(void);
+String wc_watch_surrounding(Wc *wc);
+void wc_auto_avoidance(Wc *wc);
 
 #endif
