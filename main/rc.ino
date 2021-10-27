@@ -4,21 +4,21 @@ void rc_init(
 	const int pin_ELEV,
 	const int pin_THRO,
 	const int pin_AUX5,
-	const int pin_AUX6,
+	const int pin_AUX8,
 	const int pin_AUX7
 ) {
 	rc->pin_AILE = pin_AILE;
 	rc->pin_ELEV = pin_ELEV;
 	rc->pin_THRO = pin_THRO;
 	rc->pin_AUX5 = pin_AUX5;
-	rc->pin_AUX6 = pin_AUX6;
+	rc->pin_AUX8 = pin_AUX8;
 	rc->pin_AUX7 = pin_AUX7;
 
 	rc->val_AILE = 0;
 	rc->val_ELEV = 0;
 	rc->val_THRO = 0;
 	rc->val_AUX5 = 0;
-	rc->val_AUX6 = 0;
+	rc->val_AUX8 = 0;
 	rc->val_AUX7 = 0;
 }
 
@@ -27,7 +27,7 @@ void rc_io_init(Rc *rc) {
 	pinMode(rc->pin_ELEV, INPUT);
 	pinMode(rc->pin_THRO, INPUT);
 	pinMode(rc->pin_AUX5, INPUT);
-	pinMode(rc->pin_AUX6, INPUT);
+	pinMode(rc->pin_AUX8, INPUT);
 	pinMode(rc->pin_AUX7, INPUT);
 }
 
@@ -77,10 +77,6 @@ void rc_get_AUX5(Rc *rc) {
 	}
 }
 
-void rc_get_AUX6(Rc *rc) {
-	// I am not quite sure what the behavior of a button press is
-}
-
 void rc_get_AUX7(Rc *rc) {
 	int val_AUX7_RAW = pulseIn(rc->pin_AUX7, HIGH);
 	if (val_AUX7_RAW < 1100) {
@@ -89,6 +85,15 @@ void rc_get_AUX7(Rc *rc) {
 		rc->val_AUX7 = 0;
 	} else if (val_AUX7_RAW > 1800) {
 		rc->val_AUX7 = 100;
+	}
+}
+
+void rc_get_AUX8(Rc *rc) {
+	int val_AUX6_RAW = pulseIn(rc->pin_AUX8, HIGH);
+	if (val_AUX6_RAW < 1400) {
+		rc->val_AUX8 = 100;
+	} else {
+		rc->val_AUX8 = 0;
 	}
 }
 
@@ -101,7 +106,7 @@ void rc_print(Rc *rc) {
 	Serial.print(";");
 	Serial.print(rc->val_AUX5);
 	Serial.print(";");
-	Serial.print(rc->val_AUX6);
-	Serial.print(";");
 	Serial.println(rc->val_AUX7);
+	Serial.print(";");
+	Serial.print(rc->val_AUX8);
 }

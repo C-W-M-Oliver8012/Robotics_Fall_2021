@@ -12,14 +12,14 @@ typedef struct Rc {
 	int pin_ELEV;
 	int pin_THRO;
 	int pin_AUX5;
-	int pin_AUX6;
+	int pin_AUX8;
 	int pin_AUX7;
 
 	int val_AILE;
 	int val_ELEV;
 	int val_THRO;
 	int val_AUX5;
-	int val_AUX6;
+	int val_AUX8;
 	int val_AUX7;
 } Rc;
 

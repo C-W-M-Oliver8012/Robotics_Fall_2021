@@ -32,9 +32,8 @@
 #define WHEEL_MIN_PWM 50
 
 // these will probably change
-#define SERVO_PIN 13
-#define TRIG_PIN 30
-#define ECHO_PIN 31
+#define PING_PIN 13
+#define SERVO_PIN 12
 
 // these will probably change
 #define AUTOMATIC_SPEED 150

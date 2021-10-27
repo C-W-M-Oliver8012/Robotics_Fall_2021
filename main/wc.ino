@@ -15,13 +15,8 @@ void wc_io_init(Wc *wc) {
 	wc_stop(wc);
 
 	// for automatic
-	pinMode(TRIG_PIN, OUTPUT);
-	pinMode(ECHO_PIN, INPUT);
-	digitalWrite(TRIG_PIN, LOW);
-
 	wc->head.attach(SERVO_PIN);
 	wc->head.write(90);
-	delay(2000);
 }
 
 //    ↑A-----B↑
@@ -79,18 +74,19 @@ void wc_stop(Wc *wc) {
 	MOTORD_STOP(wc->motor_pwd);
 }
 
-// echo_distance probably should be a double
-// the conversion does not make sense if echo_distance is a long
 int wc_watch(void) {
-	long echo_distance;
-	digitalWrite(TRIG_PIN, LOW);
+	long duration, cm;
+	pinMode(PING_PIN, OUTPUT);
+	digitalWrite(PING_PIN, LOW);
+	delayMicroseconds(2);
+	digitalWrite(PING_PIN, HIGH);
 	delayMicroseconds(5);
-	digitalWrite(TRIG_PIN, HIGH);
-	delayMicroseconds(15);
-	digitalWrite(TRIG_PIN, LOW);
-	echo_distance = pulseIn(ECHO_PIN, HIGH);
-	echo_distance *= 0.01657; // convert to cm
-	return round(echo_distance);
+	digitalWrite(PING_PIN, LOW);
+
+	pinMode(PING_PIN, INPUT);
+	duration = pulseIn(PING_PIN, HIGH);
+	cm = duration / 29 / 2;
+	return cm;
 }
 
 //Meassures distances to the left,center,right return a
@@ -103,7 +99,7 @@ String wc_watch_surrounding(Wc *wc) {
 	int obstacle_status = B1000;
 
 	//senfor facing left front direction
-	wc->head.write(160);
+	wc->head.write(130);
 	delay(400);
 	int distance = wc_watch();
 	if (distance < OBSTACLE_LIMIT) {
@@ -121,7 +117,7 @@ String wc_watch_surrounding(Wc *wc) {
 	}
 
 	//sensor faces to right front 20 degree direction
-	wc->head.write(20);
+	wc->head.write(50);
 	delay(400);
 	distance = wc_watch();
 	if (distance < OBSTACLE_LIMIT) {
@@ -164,11 +160,11 @@ void wc_auto_avoidance(Wc *wc) {
 	} else if (obstacle_sign == "111" || obstacle_sign == "101") {
 		Serial.println("hand back left");
 		wc_turn_right(wc);
-		delay(BACK_TIME);
+		delay(TURN_TIME);
 		wc_stop(wc);
 	} else if (obstacle_sign == "000") {
 		Serial.println("go ahead");
-		wc_forward(wc);
+		wc_reverse(wc);
 		delay(FORWARD_TIME);
 		wc_stop(wc);
 	}

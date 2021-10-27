@@ -7,14 +7,14 @@
 #define PIN_ELEV 40
 #define PIN_THRO 41
 #define PIN_AUX5 42
-#define PIN_AUX6 43
+#define PIN_AUX8 43
 #define PIN_AUX7 44
 
 Rc rc;
 Wc wc;
 
 void setup(void) {
-	rc_init(&rc, PIN_AILE, PIN_ELEV, PIN_THRO, PIN_AUX5, PIN_AUX6, PIN_AUX7);
+	rc_init(&rc, PIN_AILE, PIN_ELEV, PIN_THRO, PIN_AUX5, PIN_AUX8, PIN_AUX7);
 	wc_init(&wc, 0);
 
 	Serial.begin(SERIAL_NUM);
@@ -28,18 +28,17 @@ void loop(void) {
 	rc_get_ELEV(&rc);
 	rc_get_THRO(&rc);
 	rc_get_AUX5(&rc);
-	rc_get_AUX6(&rc);
+	rc_get_AUX8(&rc);
 	rc_get_AUX7(&rc);
 
 	// print rc values
 	rc_print(&rc);
 
 	// set is_automatic
-	// set to 100 but maybe a different value
-	if (rc.val_AUX6 == 100 && wc.is_automatic == false) {
+	if (rc.val_AUX8 == 100) {
 		wc.is_automatic = true;
 		wc.motor_pwd = AUTOMATIC_SPEED;
-	} else if (rc.val_AUX6 == 100 && wc.is_automatic == true) {
+	} else {
 		wc.is_automatic = false;
 	}
 
