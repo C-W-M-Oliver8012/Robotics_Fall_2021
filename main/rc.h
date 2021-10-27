@@ -38,8 +38,8 @@ void rc_get_AILE(Rc *rc);
 void rc_get_ELEV(Rc *rc);
 void rc_get_THRO(Rc *rc);
 void rc_get_AUX5(Rc *rc);
-void rc_get_AUX6(Rc *rc);
 void rc_get_AUX7(Rc *rc);
+void rc_get_AUX8(Rc *rc);
 void rc_print(Rc *rc);
 
 #endif
