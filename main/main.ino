@@ -17,7 +17,7 @@ void setup(void) {
 	rc_init(&rc, PIN_AILE, PIN_ELEV, PIN_THRO, PIN_AUX5, PIN_AUX8, PIN_AUX7);
 	wc_init(&wc, 0);
 
-	Serial.begin(SERIAL_NUM);
+	Serial1.begin(SERIAL_NUM);
 	rc_io_init(&rc);
 	wc_io_init(&wc);
 }
@@ -67,22 +67,31 @@ void loop(void) {
 		// move stepper
 		if (rc.val_AUX5 == 100 && rc.val_AUX7 == 100) {
 			Serial1.write(1);
+			Serial.println("One");
 		} else if (rc.val_AUX5 == 100 && rc.val_AUX7 == 0) {
 			Serial1.write(2);
+			Serial.println("Two");
 		} else if (rc.val_AUX5 == 100 && rc.val_AUX7 == -100) {
 			Serial1.write(3);
+			Serial.println("Three");
 		} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == 100) {
 			Serial1.write(4);
+			Serial.println("Four");
 		} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == 0) {
 			Serial1.write(5);
+			Serial.println("Five");
 		} else if (rc.val_AUX5 == 0 && rc.val_AUX7 == -100) {
 			Serial1.write(6);
+			Serial.println("Six");
 		} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == 100) {
 			Serial1.write(7);
+			Serial.println("Seven");
 		} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == 0) {
 			Serial1.write(8);
+			Serial.println("Eight");
 		} else if (rc.val_AUX5 == -100 && rc.val_AUX7 == -100) {
 			Serial1.write(9);
+			Serial.println("Nine");
 		}
 	} else {
 		wc_auto_avoidance(&wc);

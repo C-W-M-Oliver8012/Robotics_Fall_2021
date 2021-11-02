@@ -99,7 +99,7 @@ String wc_watch_surrounding(Wc *wc) {
 	int obstacle_status = B1000;
 
 	//senfor facing left front direction
-	wc->head.write(130);
+	wc->head.write(140);
 	delay(400);
 	int distance = wc_watch();
 	if (distance < OBSTACLE_LIMIT) {
@@ -117,7 +117,7 @@ String wc_watch_surrounding(Wc *wc) {
 	}
 
 	//sensor faces to right front 20 degree direction
-	wc->head.write(50);
+	wc->head.write(40);
 	delay(400);
 	distance = wc_watch();
 	if (distance < OBSTACLE_LIMIT) {

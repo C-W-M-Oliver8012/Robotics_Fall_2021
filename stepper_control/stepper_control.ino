@@ -45,9 +45,10 @@ void readSerial(void) {
     gripclose = false;
     gripopen = false;
 
-    if (Serial.available() > 0) {
+    if (Serial.available()) {
         inputByte = Serial.read();
     }
+    Serial.println(inputByte);
     //Control based on input from Arudino Mega
     if (inputByte == 1) {
         frameup = true;

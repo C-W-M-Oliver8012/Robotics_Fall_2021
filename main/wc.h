@@ -37,9 +37,8 @@
 
 // these will probably change
 #define AUTOMATIC_SPEED 150
-#define TURN_TIME 250
-#define FORWARD_TIME 200
-#define BACK_TIME 300
+#define TURN_TIME 350
+#define FORWARD_TIME 175
 #define OBSTACLE_LIMIT 30
 
 typedef struct Wc {
